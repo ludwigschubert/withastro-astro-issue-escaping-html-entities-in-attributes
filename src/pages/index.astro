@@ -1,0 +1,35 @@
+---
+// @Muhymin's ingeniously brief one-liner for HTML entity encoding
+const htmlEntityEncode = (str) =>
+  [...str].map((char) => `&#${char.charCodeAt()};`).join("");
+---
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>HTML entities in dynamic attributes are escaped</title>
+    <style>
+        pre {
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <h1>HTML entities in dynamic attributes get URL encoded</h1>
+    <p>
+        This makes it hard to, for example, use HTML entity encoding to obfuscate email addresses.
+        An HTML entity in an attribute will turn into <code>&amp;#116;</code>.
+    </p>
+    <a href={htmlEntityEncode("test@example.com")}>example</a>
+    <p>
+        This is different from <a href="https://github.com/withastro/astro/issues/704">#704</a> which was about 
+        HTML entities being evaluated instead of left alone — this is kind of the opposite "problem".
+        Ideally, I'd propose some sort of unsafe escape hatch from all interpretation/evaluation. I believe
+        Svelte used to offer <code>{"{{{triple_braces}}}"}</code> for such cases, but I have no opinion on syntax.
+    </p>
+    <p>
+        Note that you can only check for this issue by looking at the generated static HTML file. 
+        If you inspect the DOM in your browser, HTML entities will already have been evaluated.
+    </p>
+</body>
+</html>
