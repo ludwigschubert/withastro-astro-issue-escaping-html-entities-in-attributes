@@ -1,0 +1,20 @@
+<!DOCTYPE html><html lang="en" class="astro-EI75CJ23"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>HTML entities in dynamic attributes are escaped</title>
+    
+<link rel="stylesheet" href="assets/index.a3e54e2b.css"></head>
+<body>
+    <h1 class="astro-EI75CJ23">HTML entities in dynamic attributes get URL encoded</h1>
+    <p class="astro-EI75CJ23">
+        This makes it hard to, for example, use HTML entity encoding to obfuscate email addresses.
+        An HTML entity in an attribute will turn into <code class="astro-EI75CJ23">&amp;#116;</code>.
+    </p>
+    <a href="&amp;#116;&amp;#101;&amp;#115;&amp;#116;&amp;#64;&amp;#101;&amp;#120;&amp;#97;&amp;#109;&amp;#112;&amp;#108;&amp;#101;&amp;#46;&amp;#99;&amp;#111;&amp;#109;" class="astro-EI75CJ23">example</a>
+    <p class="astro-EI75CJ23">
+        This is different from <a href="https://github.com/withastro/astro/issues/704" class="astro-EI75CJ23">#704</a> which was about 
+        HTML entities being evaluated instead of left alone — this is kind of the opposite "problem".
+        Ideally, I'd propose some sort of unsafe escape hatch from all interpretation. I believe
+        Svelte used to offer <code class="astro-EI75CJ23">{{{triple_braces}}}</code> for such cases, but I have no opinion on syntax.
+    </p>
+</body></html>
